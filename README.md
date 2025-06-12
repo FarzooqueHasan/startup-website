@@ -1,55 +1,45 @@
-# 🚀 Innovexor – Exun Assignment 1
+# 🚀 Innovexor — Reimagining Intelligence
 
-A 4-page responsive startup website built using HTML, CSS, and JavaScript. This submission is for **Exun Web Development Assignment 1**.
+A fully responsive, interactive startup website built using **HTML, CSS, and JavaScript**, with:
+
+- Form validation and alerts
+- LocalStorage as a simulated backend
+- Integration with Webhook.site for real-time POST testing
+- Live tech news via Hacker News API
+- Bonus: Thank you redirect page and polished UI
 
 ---
 
-## 📁 Pages Included
+## 🌐 Live Demo
+
+- GitHub Repo: `https://github.com/YOUR_USERNAME/innovexor`
+- Vercel Site: `https://innovexor.vercel.app`
+
+---
+
+## 📁 Pages
 
 | Page | Description |
 |------|-------------|
-| `index.html` | Home page of the startup |
-| `contact.html` | Contact form with input validation |
-| `waitlist.html` | Waitlist form with radio buttons and alerts |
-| `updates.html` | Fetches live tech news from Hacker News API |
-| `mockup1.html` | Flexbox layout showcasing team cards |
-| `mockup2.html` | Simple login form layout |
+| `index.html` | Hero + mission + vision + CTA |
+| `contact.html` | Contact form with alert and webhook |
+| `waitlist.html` | Waitlist with radio + localStorage + webhook |
+| `updates.html` | Tech news using API + search |
+| `thankyou.html` | Redirect page after successful form submission |
 
 ---
 
-## 🛠️ Tech Used
+## 🛠️ Tech Stack
 
-- HTML5
-- CSS3 (Flexbox)
-- Vanilla JavaScript (DOM + Fetch API)
-- Git & GitHub
-- Vercel (for deployment)
-
----
-
-## 💡 Features
-
-- Responsive navigation bar
-- Form validation with `required` and alert display
-- API integration using `fetch()`
-- Clean and simple design with smooth layout
+- HTML5 + CSS3 + Vanilla JavaScript
+- Webhook.site (mock backend)
+- Hacker News API (GET integration)
+- FontAwesome, Google Fonts
+- Responsive, animated layout
 
 ---
 
-## 📸 Screenshots
-
-*You can add screenshots of your website after deployment here*
-
----
-
-## 🔗 Links
-
-- **GitHub Repository**: [https://github.com/YOUR_USERNAME/startup-website](https://github.com/YOUR_USERNAME/startup-website)
-- **Live Website**: [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
-
----
-
-## 👤 Author
+## 🧠 Author
 
 **Farzooque Hasan**  
 Exun 2025 | DPS R.K. Puram

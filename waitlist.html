@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Waitlist | Innovexor</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="https://img.icons8.com/nolan/64/artificial-intelligence.png" />
 </head>
 <body>
   <nav>
@@ -16,20 +15,20 @@
     <a href="updates.html">Updates</a>
   </nav>
 
-  <header class="hero new-hero">
-    <h1><i class="fas fa-user-clock"></i> Waitlist</h1>
-    <p>Be the first to get updates.</p>
+  <header class="hero">
+    <div class="glass">
+      <h1><i class="fas fa-user-clock"></i> Join Our Waitlist</h1>
+      <p>Be the first to experience the future.</p>
+    </div>
   </header>
 
   <form onsubmit="handleWaitlistSubmit(event)">
-    <input type="email" name="email" placeholder="Enter your Email" required />
-
+    <input type="email" name="email" placeholder="Enter your Email" required>
     <div class="radio-group">
-      <label><input type="radio" name="updates" value="yes" required /> Yes, keep me updated</label>
-      <label><input type="radio" name="updates" value="no" /> No thanks</label>
+      <label><input type="radio" name="updates" value="yes" required> Yes, send updates</label>
+      <label><input type="radio" name="updates" value="no"> No, thanks</label>
     </div>
-
-    <button type="submit"><i class="fas fa-user-plus"></i> Join Now</button>
+    <button type="submit">Join Now</button>
   </form>
 
   <footer>
