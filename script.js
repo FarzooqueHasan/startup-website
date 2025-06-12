@@ -10,7 +10,7 @@ function handleContactSubmit(e) {
   localStorage.setItem('contactSubmission', JSON.stringify({ name, email, message }));
 
   // Send to Webhook.site (replace with your real URL)
-  fetch('https://webhook.site/YOUR-UNIQUE-ID', {
+  fetch('https://webhook.site/3ecd0d06-9b10-422a-9c28-420fa5dd7ed4', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, email, message })
@@ -36,7 +36,7 @@ function handleWaitlistSubmit(e) {
   localStorage.setItem('waitlistSubmission', JSON.stringify({ email, updates }));
 
   // Send to Webhook.site (replace with your real URL)
-  fetch('https://webhook.site/YOUR-UNIQUE-ID', {
+  fetch('https://webhook.site/3ecd0d06-9b10-422a-9c28-420fa5dd7ed4', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, updates })
