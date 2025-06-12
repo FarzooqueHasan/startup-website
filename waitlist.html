@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Waitlist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="waitlist.html">Waitlist</a>
+    <a href="updates.html">Updates</a>
+  </nav>
+
+  <h1>Join Our Waitlist</h1>
+  <form onsubmit="handleWaitlistSubmit(event)">
+    <input type="email" name="email" placeholder="Your Email" required />
+    <div class="radio-group">
+      <label><input type="radio" name="updates" value="yes" required /> Yes, send updates</label>
+      <label><input type="radio" name="updates" value="no" /> No, thanks</label>
+    </div>
+    <button type="submit">Join Waitlist</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
