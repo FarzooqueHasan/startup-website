@@ -1,68 +1,117 @@
+/* Base styling */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f7f7f7;
+  font-family: 'Poppins', sans-serif;
+  background: #f0f4f8;
   color: #333;
 }
 
+/* Navbar */
 nav {
-  background: #222;
-  padding: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: #111;
+  padding: 15px;
+  gap: 25px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 nav a {
   color: white;
-  margin: 0 15px;
   text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #00d1b2;
 }
 
+/* Hero Section */
 .hero {
-  padding: 50px;
-  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  padding: 100px 20px;
   text-align: center;
+  background: linear-gradient(120deg, #00c6ff, #0072ff);
   color: white;
 }
+.hero h1 {
+  font-size: 3rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
 
-h1, h2 {
+/* Section spacing */
+section {
+  padding: 40px 20px;
   text-align: center;
 }
 
+/* Forms */
 form {
-  max-width: 400px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
-
-input, textarea, button {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
+form input, form textarea, form button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
-
-button {
-  background: #2193b0;
+form button {
+  background: #0072ff;
   color: white;
   border: none;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
+}
+form button:hover {
+  background: #005ecb;
 }
 
+/* Cards (for mockup1) */
 .cards {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  flex-wrap: wrap;
+  gap: 25px;
 }
-
 .card {
   background: white;
-  padding: 15px;
-  width: 200px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 250px;
   border-radius: 10px;
-  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* News list (updates.html) */
+#updates {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 10px;
+}
+#updates p {
+  background: white;
+  margin: 10px 0;
+  padding: 10px;
+  border-left: 4px solid #0072ff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+#updates a {
+  text-decoration: none;
+  color: #0072ff;
 }
