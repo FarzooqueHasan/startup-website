@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Innovexor</title>
+  <title>Waitlist | Innovexor</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -15,15 +16,25 @@
     <a href="updates.html">Updates</a>
   </nav>
 
-  <h1>Join Our Waitlist</h1>
+  <header class="hero new-hero">
+    <h1><i class="fas fa-user-clock"></i> Waitlist</h1>
+    <p>Be the first to get updates.</p>
+  </header>
+
   <form onsubmit="handleWaitlistSubmit(event)">
-    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="email" name="email" placeholder="Enter your Email" required />
+
     <div class="radio-group">
-      <label><input type="radio" name="updates" value="yes" required /> Yes, send updates</label>
-      <label><input type="radio" name="updates" value="no" /> No, thanks</label>
+      <label><input type="radio" name="updates" value="yes" required /> Yes, keep me updated</label>
+      <label><input type="radio" name="updates" value="no" /> No thanks</label>
     </div>
-    <button type="submit">Join Waitlist</button>
+
+    <button type="submit"><i class="fas fa-user-plus"></i> Join Now</button>
   </form>
+
+  <footer>
+    <p>© 2025 Innovexor | All rights reserved</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
