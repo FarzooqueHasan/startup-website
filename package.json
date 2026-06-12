@@ -1,0 +1,21 @@
+{
+  "name": "startup-website-main",
+  "version": "1.0.0",
+  "description": "A modern 5-page responsive startup website built using **HTML, CSS, and JavaScript**, designed to simulate a real-world product landing with working form submissions, backend integration, and live API data.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.7.0"
+  }
+}

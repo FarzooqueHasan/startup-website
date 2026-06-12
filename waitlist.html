@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Waitlist | Innovexor</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="https://img.icons8.com/nolan/64/artificial-intelligence.png" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+    <a href="waitlist.html">Waitlist</a>
+    <a href="updates.html">Updates</a>
+    <a href="account.html">Account</a>
+  </nav>
+
+  <header class="hero">
+    <div class="glass">
+      <h1><i class="fas fa-user-clock"></i> Join Our Waitlist</h1>
+      <p>Be the first to experience the future.</p>
+    </div>
+  </header>
+
+  <div id="waitlist-auth-message" class="section" style="display: none;">
+    <h2>Access Denied</h2>
+    <p>You must be logged in to view and sign up for the waitlist.</p>
+    <div style="margin-top: 20px;">
+      <a href="account.html" style="background: #2c5364; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: bold;">Go to Login / Register</a>
+    </div>
+  </div>
+
+  <div id="waitlist-form-container" style="display: none;">
+    <form onsubmit="handleWaitlistSubmit(event)">
+      <input type="email" name="email" placeholder="Enter your Email" required>
+      <div class="radio-group">
+        <label><input type="radio" name="updates" value="yes" required> Yes, send updates</label>
+        <label><input type="radio" name="updates" value="no"> No, thanks</label>
+      </div>
+      <button type="submit">Join Now</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>© 2025 Innovexor | All rights reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
