@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 async function checkAuth() {
   try {
     const res = await fetch('/auth/me');
@@ -11,11 +12,15 @@ async function checkAuth() {
 }
 
 async function handleContactSubmit(e) {
+=======
+function handleContactSubmit(e) {
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e
   e.preventDefault();
   const name = e.target.name.value;
   const email = e.target.email.value;
   const message = e.target.message.value;
 
+<<<<<<< HEAD
   alert(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
 
   localStorage.setItem('contactSubmission', JSON.stringify({ name, email, message }));
@@ -29,12 +34,29 @@ async function handleContactSubmit(e) {
   } catch (err) {
     console.error(err);
   }
+=======
+  alert(`Thank you, ${name}!\nWe will contact you at ${email}.`);
+
+  // Save to localStorage
+  localStorage.setItem('contactSubmission', JSON.stringify({ name, email, message }));
+
+  // Send to Webhook.site (replace with your real URL)
+  fetch('https://webhook.site/3ecd0d06-9b10-422a-9c28-420fa5dd7ed4', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, message })
+  });
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e
 
   e.target.reset();
   window.location.href = 'thankyou.html';
 }
 
+<<<<<<< HEAD
 async function handleWaitlistSubmit(e) {
+=======
+function handleWaitlistSubmit(e) {
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e
   e.preventDefault();
   const email = e.target.email.value;
   const updates = e.target.updates.value;
@@ -44,6 +66,7 @@ async function handleWaitlistSubmit(e) {
     return;
   }
 
+<<<<<<< HEAD
   alert(`Email: ${email}\nReceive Updates: ${updates}`);
 
   localStorage.setItem('waitlistSubmission', JSON.stringify({ email, updates }));
@@ -57,11 +80,25 @@ async function handleWaitlistSubmit(e) {
   } catch (err) {
     console.error(err);
   }
+=======
+  alert(`You've joined the waitlist with email: ${email}\nUpdate preference: ${updates}`);
+
+  // Save to localStorage
+  localStorage.setItem('waitlistSubmission', JSON.stringify({ email, updates }));
+
+  // Send to Webhook.site (replace with your real URL)
+  fetch('https://webhook.site/3ecd0d06-9b10-422a-9c28-420fa5dd7ed4', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, updates })
+  });
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e
 
   e.target.reset();
   window.location.href = 'thankyou.html';
 }
 
+<<<<<<< HEAD
 async function handleRegisterSubmit(e) {
   e.preventDefault();
   const email = e.target.email.value;
@@ -279,3 +316,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchUpdates();
   }
 });
+=======
+async function fetchUpdates() {
+  const query = document.getElementById("searchBox").value || "AI";
+  const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query}`);
+  const data = await res.json();
+  const list = data.hits.slice(0, 5).map(post =>
+    `<p><a href="${post.url}" target="_blank">${post.title}</a></p>`
+  ).join('');
+  document.getElementById("updates").innerHTML = list;
+}
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e

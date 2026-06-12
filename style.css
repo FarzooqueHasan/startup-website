@@ -106,6 +106,7 @@ footer {
   padding: 20px;
   font-size: 14px;
   margin-top: 60px;
+<<<<<<< HEAD
 }
 .form-container {
   max-width: 500px;
@@ -126,4 +127,6 @@ select {
   border-radius: 8px;
   border: 1px solid #ccc;
   background: white;
+=======
+>>>>>>> 4a910aa73e0ace54d5cedb9c754656229f895e0e
 }
