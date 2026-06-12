@@ -22,11 +22,17 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+let useMock = false;
+let mockUsers = [];
+let mockMessages = [];
+let mockWaitlist = [];
+
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/innovexor';
 mongoose.connect(mongoURI).then(() => {
   console.log('Connected to MongoDB');
 }).catch(err => {
-  console.error('MongoDB connection error:', err);
+  console.error('MongoDB connection error, using mock:', err.message);
+  useMock = true;
 });
 
 const userSchema = new mongoose.Schema({
@@ -51,19 +57,104 @@ const waitlistSchema = new mongoose.Schema({
 });
 const Waitlist = mongoose.model('Waitlist', waitlistSchema);
 
+const findUserByEmail = async (email) => {
+  if (useMock) {
+    return mockUsers.find(u => u.email === email);
+  }
+  return await User.findOne({ email });
+};
+
+const findUserById = async (id) => {
+  if (useMock) {
+    return mockUsers.find(u => u._id === id);
+  }
+  return await User.findById(id).select('-password');
+};
+
+const saveUser = async (userData) => {
+  if (useMock) {
+    const user = { _id: new mongoose.Types.ObjectId().toString(), ...userData };
+    mockUsers.push(user);
+    return user;
+  }
+  const user = new User(userData);
+  await user.save();
+  return user;
+};
+
+const updateUserById = async (id, updateData) => {
+  if (useMock) {
+    const idx = mockUsers.findIndex(u => u._id === id);
+    if (idx === -1) return null;
+    mockUsers[idx] = { ...mockUsers[idx], ...updateData };
+    const result = { ...mockUsers[idx] };
+    delete result.password;
+    return result;
+  }
+  return await User.findByIdAndUpdate(id, updateData, { new: true }).select('-password');
+};
+
+const deleteUserById = async (id) => {
+  if (useMock) {
+    mockUsers = mockUsers.filter(u => u._id !== id);
+    mockMessages = mockMessages.filter(m => m.userId !== id);
+    return true;
+  }
+  await User.findByIdAndDelete(id);
+  return true;
+};
+
+const saveMessage = async (msgData) => {
+  if (useMock) {
+    const msg = { _id: new mongoose.Types.ObjectId().toString(), ...msgData };
+    mockMessages.push(msg);
+    return msg;
+  }
+  const msg = new Message(msgData);
+  await msg.save();
+  return msg;
+};
+
+const findMessagesByUserId = async (userId) => {
+  if (useMock) {
+    return mockMessages.filter(m => m.userId === userId);
+  }
+  return await Message.find({ userId });
+};
+
+const updateMessageById = async (id, messageText) => {
+  if (useMock) {
+    const idx = mockMessages.findIndex(m => m._id === id);
+    if (idx === -1) return null;
+    mockMessages[idx].message = messageText;
+    return mockMessages[idx];
+  }
+  return await Message.findByIdAndUpdate(id, { message: messageText }, { new: true });
+};
+
+const saveWaitlist = async (wlData) => {
+  if (useMock) {
+    const wl = { _id: new mongoose.Types.ObjectId().toString(), ...wlData };
+    mockWaitlist.push(wl);
+    return wl;
+  }
+  const wl = new Waitlist(wlData);
+  await wl.save();
+  return wl;
+};
+
 const handleRegister = async (req, res) => {
   try {
     const { email, password, bio, gender } = req.body;
     if (!email || !password) {
       return res.status(400).json({ error: 'Missing email or password' });
     }
-    const existingUser = await User.findOne({ email });
+    const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ email, password: hashedPassword, bio, gender });
-    await user.save();
+    const user = await saveUser({ email, password: hashedPassword, bio, gender });
     req.session.userId = user._id;
     res.status(201).json({ message: 'User registered successfully', userId: user._id });
   } catch (err) {
@@ -79,7 +170,7 @@ const handleLogin = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ error: 'Missing email or password' });
     }
-    const user = await User.findOne({ email });
+    const user = await findUserByEmail(email);
     if (!user) {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
@@ -113,7 +204,7 @@ const handleMe = async (req, res) => {
     if (!req.session.userId) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
-    const user = await User.findById(req.session.userId).select('-password');
+    const user = await findUserById(req.session.userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -138,7 +229,7 @@ const handleUpdateUser = async (req, res) => {
     if (password) {
       updateData.password = await bcrypt.hash(password, 10);
     }
-    const user = await User.findByIdAndUpdate(req.session.userId, updateData, { new: true }).select('-password');
+    const user = await updateUserById(req.session.userId, updateData);
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -152,7 +243,7 @@ const handleDeleteUser = async (req, res) => {
     if (!req.session.userId) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
-    await User.findByIdAndDelete(req.session.userId);
+    await deleteUserById(req.session.userId);
     req.session.destroy(err => {
       if (err) {
         return res.status(500).json({ error: 'Failed to clear session' });
@@ -174,8 +265,7 @@ const handleCreateMessage = async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
     const userId = req.session.userId || null;
-    const msg = new Message({ userId, name, email, message });
-    await msg.save();
+    const msg = await saveMessage({ userId, name, email, message });
     res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -187,7 +277,7 @@ app.post('/api/message', handleCreateMessage);
 const handleReadMessages = async (req, res) => {
   try {
     const { id } = req.params;
-    const messages = await Message.find({ userId: id });
+    const messages = await findMessagesByUserId(id);
     res.status(200).json(messages);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -203,7 +293,7 @@ const handleUpdateMessage = async (req, res) => {
     if (!message) {
       return res.status(400).json({ error: 'Missing message content' });
     }
-    const msg = await Message.findByIdAndUpdate(id, { message }, { new: true });
+    const msg = await updateMessageById(id, message);
     if (!msg) {
       return res.status(404).json({ error: 'Message not found' });
     }
@@ -224,8 +314,7 @@ const handleCreateWaitlist = async (req, res) => {
     if (!email || !updates) {
       return res.status(400).json({ error: 'Missing email or updates preference' });
     }
-    const item = new Waitlist({ email, updates });
-    await item.save();
+    const item = await saveWaitlist({ email, updates });
     res.status(201).json(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
